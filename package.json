@@ -1,0 +1,60 @@
+{
+  "name": "mern_base",
+  "version": "1.0.0",
+  "description": "Base Package for Node projects",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "tailwindcss -i ./src/index.css -o ./public/css/output.css",
+    "watch": "concurrently \"nodemon index.js\" \"npx tailwindcss -i ./src/index.css -o ./public/css/output.css --watch\""
+  },
+  "author": "Mandeep Saini",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.4.19",
+    "axios": "^1.7.2",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "concurrently": "^8.2.2",
+    "config": "^3.3.11",
+    "connect-mongo": "^5.1.0",
+    "connect-pg-simple": "^9.0.1",
+    "cookie-parser": "^1.4.6",
+    "crypto": "^1.0.1",
+    "debug": "^4.3.5",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-async-errors": "^3.1.1",
+    "express-ejs-layouts": "^2.5.1",
+    "express-fileupload": "^1.5.1",
+    "express-session": "^1.18.0",
+    "imgur": "^2.4.2",
+    "joi": "^17.13.1",
+    "lodash": "^4.17.21",
+    "module-alias": "^2.2.3",
+    "mongoose": "^8.5.0",
+    "multer": "^1.4.5-lts.1",
+    "pg": "^8.12.0",
+    "postcss": "^8.4.39",
+    "tailwind": "^4.0.0",
+    "winston": "^3.13.0"
+  },
+  "_moduleAliases": {
+    "@root": ".",
+    "@startup": "./app/startup",
+    "@routes": "./app/routes",
+    "@controllers": "./app/controllers",
+    "@middlewares": "./app/middlewares",
+    "@views": "./app/views",
+    "@helpers": "./app/helper",
+    "@models": "./app/models",
+    "@databases": "./app/database",
+    "@configs": "./config"
+  },
+  "devDependencies": {
+    "daisyui": "^4.12.10",
+    "tailwindcss": "^3.4.4"
+  }
+}

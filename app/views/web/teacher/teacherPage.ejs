@@ -1,0 +1,120 @@
+<% if (eventCount === 0) { %>
+    <div class="flex justify-center items-center h-full py-20">
+        <h1 class="text-2xl font-bold text-gray-600">No Events To Display</h1>
+    </div>
+<% } %>
+
+<% if (eventCount !== 0) { %> 
+ 
+    <div class="overflow-x-auto">
+        <table class="table">
+            <!-- head -->
+            <thead class="text-center">
+            <tr>
+                <th>Name</th>
+                <th>Host Name</th>
+                <th>Date</th>
+                <th>Topic</th>
+                <th>Certificate</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% eventTable.forEach(event => { %>
+                <tr class="text-center">
+
+                    <td>
+                        <div class="items-center">
+                            <div class="font-bold"><%= event.name %></div>
+                        </div>
+                    </td>
+                    <td>
+                            <div class="font-bold"><%= event.host %></div>
+                    </td>
+
+                    <td>
+                        <div class="font-bold"><%= event.date %></div>
+                    </td>
+
+                    <td>
+                        <%= event.topic %>
+                        <br />
+                        <span class="badge badge-ghost badge-sm"><%= event.topic %></span>
+                    </td>
+
+                    <th>
+                        <form action="/events/certificate" method="post">
+                            <input type="hidden" name='certificate' value="<%= event.certificate %>">
+                            <input type="submit" value="Certificate" class="btn btn-ghost btn-sm"></input>
+                        </form>
+                    </th>
+                    
+                </tr>
+            <% }) %>
+        </tbody>
+            <!-- foot -->
+            <tfoot>
+            
+            </tfoot>
+        </table>
+        </div>
+
+<% } %>
+
+
+<div class="flex justify-center items-center min-h-screen">
+    <!-- Add Event Button -->
+    <button onclick="toggleModal()" class="px-4 py-2 text-white bg-blue-600 rounded-lg shadow-md hover:bg-blue-700 focus:ring-4 focus:ring-blue-300">
+      Add Event
+    </button>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="fixed inset-0 hidden items-center justify-center bg-black bg-opacity-50 z-50">
+    <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-8">
+      <div class="flex justify-between items-center pb-4 border-b border-gray-200">
+        <h3 class="text-2xl font-bold text-gray-700">Add Event</h3>
+        <button onclick="toggleModal()" class="text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+      </div>
+      <form action="/events/add" method="post" class="space-y-6 pt-6" enctype="multipart/form-data">
+        <div>
+          <label for="name" class="block mb-2 text-sm font-medium text-gray-800">Event Name</label>
+          <input type="text" id="name" name="name" required class="block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div>
+          <label for="date" class="block mb-2 text-sm font-medium text-gray-800">Event Date</label>
+          <input type="date" id="date" name="date" required class="block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div>
+          <label for="host_name" class="block mb-2 text-sm font-medium text-gray-800">Host Name</label>
+          <input type="text" id="host_name" name="host_name" required class="block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div>
+          <label for="topic" class="block mb-2 text-sm font-medium text-gray-800">Topic</label>
+          <input type="text" id="topic" name="topic" required class="block w-full p-3 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
+        </div>
+        <div>
+          <label for="certificate" class="block mb-2 text-sm font-medium text-gray-800">Certificate</label>
+          <input type="file" id="certificate" name="certificate" class="block w-full text-sm text-gray-800 border border-gray-300 rounded-md cursor-pointer focus:outline-none">
+        </div>
+        <div class="flex justify-end pt-4 border-t border-gray-200">
+          <button type="button" onclick="toggleModal()" class="px-4 py-2 text-gray-700 bg-gray-200 rounded-md hover:bg-gray-300 focus:ring-4 focus:ring-gray-300 mr-2">
+            Cancel
+          </button>
+          <button type="submit" class="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:ring-4 focus:ring-blue-300">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <script>
+    // JavaScript to toggle modal visibility
+    function toggleModal() {
+      const modal = document.getElementById('modal');
+      modal.classList.toggle('hidden');
+      modal.classList.toggle('flex');
+    }
+  </script>
+  

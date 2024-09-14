@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Logger</title>
+    <link rel="stylesheet" href="/css/output.css">
+    <style>
+      body {
+        transition: padding-left 0.3s ease; /* Transition for the body padding */
+      }
+      .drawer-side {
+        transition: transform 0.3s ease; /* Transition for the drawer */
+      }
+      .drawer-toggle:checked ~ .drawer-side {
+        transform: translateX(0); /* Drawer is visible when checked */
+      }
+      .drawer-side {
+        transform: translateX(-100%); /* Drawer is hidden by default */
+      }
+    </style>
+</head>
+<body >
+  <header>
+    <div class="drawer">
+      <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content flex justify-between items-center px-10">
+        <!-- Sidebar trigger button on the left -->
+        <div>
+          <label for="my-drawer" class="btn btn-primary drawer-button">&#10247;</label>
+        </div>
+
+        <!-- Navbar on the right -->
+        <div class="navbar bg-base-100 flex-grow flex justify-end">
+          <div class="flex gap-2">
+            <div class="form-control">
+              <input type="text" placeholder="Search" class="input input-bordered w-24 md:w-auto" />
+            </div>
+            <div class="dropdown dropdown-end">
+              <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                <div class="w-10 rounded-full">
+                  <img alt="Avatar" src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                </div>
+              </div>
+              <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                <li>
+                  <a class="justify-between">
+                    Profile
+                    <span class="badge">New</span>
+                  </a>
+                </li>
+                <li><a>Settings</a></li>
+                <li><a>Logout</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="drawer-side shadow-lg">
+        <label for="my-drawer" class=""></label>
+        <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4 py-24 opacity-100">
+          <!-- Sidebar content here -->
+          <li><a href="/teacher">Events</a></li>
+          <li><a href="/redirect?message=Under Work">Edit Profile</a></li>
+          <li>
+            <label for="my-drawer" class="btn btn-ghost w-full text-left">Close Drawer</label>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </header>  
+  
+    <div class="content-center">
+      <%- body %>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const drawerToggle = document.getElementById('my-drawer');
+        const body = document.body;
+  
+        drawerToggle.addEventListener('change', function() {
+          if (drawerToggle.checked) {
+            body.style.paddingLeft = '300px'; // Adjust based on drawer width
+          } else {
+            body.style.paddingLeft = '0';
+          }
+        });
+      });
+    </script>
+
+</body>
+</html>

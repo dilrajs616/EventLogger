@@ -1,0 +1,61 @@
+<% if (emptyResult === true) { %>
+    <div class="flex justify-center items-center h-full py-20">
+        <h1 class="text-2xl font-bold text-gray-600">No Available Teachers</h1>
+    </div>
+<% } %>
+
+<% if (emptyResult === false) { %>
+
+    <div class="overflow-x-auto">
+        <table class="table">
+            <!-- head -->
+            <thead class="text-center">
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Subject</th>
+                <th>Events</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% teacherTable.forEach(teacher => { %>
+                <tr class="text-center">
+                    <td class="justify-center items-center content-center text-center">
+                        <div class="flex items-center justify-center"> <!-- Added justify-center -->
+                            <div class="avatar">
+                                <div class="mask mask-squircle h-12 w-12 flex items-center justify-center"> <!-- Added flex and justify-center -->
+                                    <img src="/img/default_image.jpg" alt="Avatar" class="h-full w-full object-cover" /> <!-- Adjusted img tag -->
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    
+                    <td>
+                        <div class="items-center">
+                            <div class="font-bold"><%= teacher.name %></div>
+                            <div class="text-sm opacity-50"><%= teacher.email %></div>
+                        </div>
+                    </td>
+                    <td>
+                        <%= teacher.subject %>
+                        <br />
+                        <span class="badge badge-ghost badge-sm"><%= teacher.subject %></span>
+                    </td>
+                    <th>
+                        <form action="/events/teacher" method="post">
+                            <input type="hidden" name="teacherId" value="<%= teacher.id %>">
+                            <input type="submit" value="Events" class="btn btn-ghost btn-sm"></input>
+                        </form>
+                    </th>
+                </tr>
+            <% }) %>
+        </tbody>
+            <!-- foot -->
+            <tfoot>
+            
+            </tfoot>
+        </table>
+        </div>
+ 
+<% } %>
